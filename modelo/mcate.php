@@ -2,65 +2,73 @@
 class mcate{
 	#Metodo mostrar Todos los registros de la tabla category
 	public function selcate(){
-		$resultado=null;
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$sql = "SELECT idcate, cname, cicon FROM category";
-		//echo "<br><br><br><br>".$sql."<br><br>";
-		$result = $conexion->prepare($sql);
-		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$result->execute();
-		while($f=$result->fetch()){
-			$resultado[]=$f;
+		
+		try {
+			$result = $conexion->query($sql);
+			$resultado = $result->fetchAll(PDO::FETCH_ASSOC);
+			return $resultado;
+		} catch (PDOException $e) {
+			// Manejo de errores
+			echo "Error al obtener los registros de la tabla category: " . $e->getMessage();
+			return null;
 		}
-		return $resultado;
 	}
+	
 	//Mostrar un registro
 	public function selcate1($idcate){
-		$resultado=null;
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
-		$sql = "SELECT idcate, cname, cicon FROM category";
-		$sql .= " WHERE idcate=:idcate";
-		//echo "<br><br><br><br>".$sql."<br>".$filtro."<br>";
-		$result = $conexion->prepare($sql);
-		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$result->bindParam(':idcate',$idcate);
-		$result->execute();
-		while($f=$result->fetch()){
-			$resultado[]=$f;
+		$sql = "SELECT idcate, cname, cicon FROM category WHERE idcate = :idcate";
+		
+		try {
+			$result = $conexion->prepare($sql);
+			$result->bindParam(':idcate', $idcate);
+			$result->execute();
+			$resultado = $result->fetchAll(PDO::FETCH_ASSOC);
+			return $resultado;
+		} catch (PDOException $e) {
+			// Manejo de errores
+			echo "Error al obtener el registro de la tabla category: " . $e->getMessage();
+			return null;
 		}
-		return $resultado;
 	}
+	
 	//Actualizar o Insertar
 	public function inscate($idcate, $cname, $cicon){
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
-		$sql = "CALL inscate(:idcate, :cname, :cicon);";
-		//echo "<br><br><br><br>".$sql."<br>'".$idcate."'-'".$cname."'-'".$cicon."'<br>";
-		$result = $conexion->prepare($sql);
-		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$result->bindParam(':idcate',$idcate);
-		$result->bindParam(':cname',$cname);
-		$result->bindParam(':cicon',$cicon);
-		if(!$result)
-			echo "<script>alert('ERROR AL REGISTRAR');</script>";
-		else
+		$sql = "CALL inscate(:idcate, :cname, :cicon)";
+	
+		try {
+			$result = $conexion->prepare($sql);
+			$result->bindParam(':idcate', $idcate);
+			$result->bindParam(':cname', $cname);
+			$result->bindParam(':cicon', $cicon);
 			$result->execute();
-	}
+		} catch (PDOException $e) {
+			// Manejo de errores
+			echo "Error al registrar en la tabla category: " . $e->getMessage();
+			return;
+		}
+	}	
 	//Eliminar
 	public function delcate($idcate){
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
-		$sql = "CALL delcate(:idcate);";
-		//echo "<br><br><br><br>".$sql."<br>".$idcate."<br>";
-		$result = $conexion->prepare($sql);
-		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$result->bindParam(':idcate',$idcate);
-		if(!$result)
-			echo "<script>alert('ERROR AL REGISTRAR');</script>";
-		else
+		$sql = "CALL delcate(:idcate)";
+	
+		try {
+			$result = $conexion->prepare($sql);
+			$result->bindParam(':idcate', $idcate);
 			$result->execute();
-	}
+		} catch (PDOException $e) {
+			// Manejo de errores
+			echo "Error al eliminar el registro de la tabla category: " . $e->getMessage();
+			return;
+		}
+	}	
 }
 ?>

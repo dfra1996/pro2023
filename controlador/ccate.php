@@ -12,36 +12,38 @@ if(!$idcate)
 $cname = isset($_POST['cname']) ? $_POST['cname']:NULL;
 $cicon = isset($_POST['cicon']) ? $_POST['cicon']:NULL;
 $opera = isset($_POST['opera']) ? $_POST['opera']:NULL;
+
+
 if(!$opera)
 	$opera = isset($_GET['opera']) ? $_GET['opera']:NULL;
 
 //echo "<br><br><br>".$idcate."-".$cname."-".$cicon."-".$filtro."-".$opera."<br><br>";
 //Insertar
-if($opera=="InsAct"){
-	if($cname){
-		$mcate->inscate($idcate, $cname, $cicon);
-		#echo "<script>alert('Datos insertados y/o actualizados existosamente');</script>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($opera == "InsAct" && !empty($cname)) {
+        $mcate->inscate($idcate, $cname, $cicon);
+		$_SESSION['success_message'] = 'Datos insertados y/o actualizados exitosamente';
+		
 
-		// Después de la inserción exitosa de los datos
-		#$response = array('success' => true, 'message' => 'Datos insertados y/o actualizados existosamente');
-		#echo json_encode($response);
-		
-		#echo '<script>window.location="home.php?pg='.$pg.'";</script>';
-	}else{
-		echo "<script>alert('Falta llenar algunos campos');</script>";
-	}
-	$idcate = NULL;
+
+        #echo "<script>alert('Datos insertados y/o actualizados exitosamente');</script>";
+        echo '<script>window.location="home.php?pg=' . $pg . '";</script>';
+        exit;
+        $idcate = NULL; // Movido aquí para mantener el valor en caso de éxito
+    } else {
+        echo "<script>alert('Falta llenar algunos campos');</script>";
+    }
 }
+
 //Eliminar
-if($opera=="Eliminar"){
-	if($idcate){
-		$mcate->delcate($idcate);
-		
-		#echo "<script>alert('Datos eliminados existosamente');</script>";
-	}
-	$idcate = NULL;
+if ($opera == "Eliminar") {
+    if (!empty($idcate)) {
+        $mcate->delcate($idcate);
+        $mensaje = "Datos eliminados exitosamente.";
+    }
 }
-//Insertar datos
+
+//Insertar datos/*
 function insdatos($idcate,$pg,$arc){
 	$mcate = new mcate();
 	$dtcate = NULL;
