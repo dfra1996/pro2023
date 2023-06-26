@@ -20,8 +20,13 @@ if(!$opera)
 if($opera=="InsAct"){
 	if($cname){
 		$mcate->inscate($idcate, $cname, $cicon);
-		echo "<script>alert('Datos insertados y/o actualizados existosamente');</script>";
-		echo '<script>window.location="home.php?pg='.$pg.'";</script>';
+		#echo "<script>alert('Datos insertados y/o actualizados existosamente');</script>";
+
+		// Después de la inserción exitosa de los datos
+		#$response = array('success' => true, 'message' => 'Datos insertados y/o actualizados existosamente');
+		#echo json_encode($response);
+		
+		#echo '<script>window.location="home.php?pg='.$pg.'";</script>';
 	}else{
 		echo "<script>alert('Falta llenar algunos campos');</script>";
 	}
@@ -31,7 +36,8 @@ if($opera=="InsAct"){
 if($opera=="Eliminar"){
 	if($idcate){
 		$mcate->delcate($idcate);
-		echo "<script>alert('Datos eliminados existosamente');</script>";
+		
+		#echo "<script>alert('Datos eliminados existosamente');</script>";
 	}
 	$idcate = NULL;
 }

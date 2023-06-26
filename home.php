@@ -49,8 +49,7 @@
 				$pefid = isset($_SESSION["pefid"]) ? $_SESSION["pefid"]:NULL;
 				include("vista/vmen.php");
 				require_once 'controlador/ayudas.php';
-			?>	
-		
+			?>
 		
 			<?php moscon($pefid,$pg);?>
 					
@@ -96,5 +95,6 @@
 
 		<!-- Template Javascript -->
 		<script src="js/main.js"></script>
+		<script src="js/valida.js"></script>
 	</body>
 </html>
