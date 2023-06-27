@@ -89,21 +89,23 @@ DELIMITER ;
 
 DROP PROCEDURE instrade;
 DELIMITER //
-		CREATE PROCEDURE instrade(idcat bigint(11), cnam varchar(50),cico varchar(50))
+		CREATE PROCEDURE instrade(idtrademar bigint(11),tnam varchar(50),tim varchar(250))
 		BEGIN
-		IF NOT EXISTS(SELECT idcate FROM category WHERE idcate=idcat) THEN 
-			INSERT INTO category (cname, cicon) VALUES (cnam, cico);
+		IF NOT EXISTS(SELECT idtrademark FROM trademark WHERE idtrademark=idtrademar) THEN 
+			INSERT INTO trademark (tname, timg) VALUES (tnam, tim);
 		ELSE
-			UPDATE category 
-			SET cname=cnam, cicon=cico
-			WHERE idcate=idcat;
+			UPDATE trademark 
+			SET tname=timg, timg=tim
+			WHERE idtrademark=idtrademar;
 		END IF;
 	END //
 DELIMITER ;
 
+
+DROP PROCEDURE deltrade;
 DELIMITER //
-CREATE PROCEDURE delcate(idcat bigint(11))
+CREATE PROCEDURE deltrade(idtrademar bigint(11))
 BEGIN
-  DELETE FROM category WHERE idcate = idcat;
+  DELETE FROM trademark WHERE idtrademark = idtrademar;
 END //
 DELIMITER ;

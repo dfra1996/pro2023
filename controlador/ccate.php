@@ -23,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($opera == "InsAct" && !empty($cname)) {
         $mcate->inscate($idcate, $cname, $cicon);
 		$_SESSION['success_message'] = 'Datos insertados y/o actualizados exitosamente';
-		
-
 
         #echo "<script>alert('Datos insertados y/o actualizados exitosamente');</script>";
         echo '<script>window.location="home.php?pg=' . $pg . '";</script>';
@@ -40,6 +38,8 @@ if ($opera == "Eliminar") {
     if (!empty($idcate)) {
         $mcate->delcate($idcate);
         $mensaje = "Datos eliminados exitosamente.";
+        echo '<script>window.location="home.php?pg=' . $pg . '";</script>';
+
     }
 }
 
@@ -57,19 +57,19 @@ function insdatos($idcate,$pg,$arc){
 
 			$txt .= '</div>';		
 			$txt .= '<div class="card-header py-3">';
-				$txt .= '<h6 class="m-0 font-weight-bold text-primary">Categorias</h6>';
+				$txt .= '<h4 class="m-0 font-weight-bold text-primary">Categorias</h4>';
 			$txt .= '</div>';
 
 			$txt .= '<form name="frm1" action="'.$arc.'?pg='.$pg.'" method="POST">';
 				if($idcate and $dtcate){
-					$txt .= '<label>ID Categoria</label>';
+					$txt .= '<h6 class="warning">ID Categoria</h6>';
 					$txt .= '<input type="text" name="idcate" readonly value="'.$idcate.'" class="form-control" />';
 				}
-				$txt .= '<label>Nombre</label>';
+				$txt .= '<h6 class="warning">Nombre</h6>';
 				$txt .= '<input type="text" name="cname" maxlength="70" class="form-control"';
 					if($idcate and $dtcate) $txt .= ' value="'.$dtcate[0]['cname'].'"';
 				$txt .= ' required />';
-				$txt .= '<label>Icono</label>';
+				$txt .= '<h6 class="warning">Icono</h6>';
 				$txt .= '<input type="text" name="cicon" maxlength="50" class="form-control"';
 					if($idcate and $dtcate) $txt .= ' value="'.$dtcate[0]['cicon'].'"';
 				$txt .= ' />';
@@ -95,7 +95,7 @@ function mosdatos($pg,$arc){
 	$txt .= '<div class= "container-fluid pt-4 px-4">';
 		$txt .= '<div class="bg-secondary rounded-top p-4">';
 		$txt .= '<div class="card-header py-3">';
-		$txt .= '<h6 class="m-0 font-weight-bold text-info">Listado de Categorias</h6>';
+		$txt .= '<h4 class="m-0 font-weight-bold text-info">Listado de Categorias</h4>';
 		$txt .= '</div>';
 		
 		if($dtcate){
@@ -137,7 +137,7 @@ function mosdatos($pg,$arc){
 				$txt .= '</table>';
 			$txt .= '</div>';
 		}else{
-			$txt .= '<h2 class="text-danger">No existen datos</h2>';
+			$txt .= '<h4 class="text-danger">No existen datos</h4>';
 		}
 		$txt .= '</div>';
 	$txt .= '</div>';

@@ -50,19 +50,19 @@ function insdatos($idtrademark,$pg,$arc){
 		$txt .= '</div>';
 
 		$txt .= '<div class="card-header py-3">';
-			$txt .= '<h6 class="m-0 font-weight-bold text-info">Gestion Marcas</h6>';
+			$txt .= '<h4 class="m-0 font-weight-bold text-info">Gestion Marcas</h4>';
 		$txt .= '</div>';
 
 			$txt .= '<form name="frm1" action="'.$arc.'?pg='.$pg.'" method="POST">';
 				if($idtrademark and $dttrademark){
-					$txt .= '<label>ID Categoria</label>';
+					$txt .= '<h6 class="warning">ID Categoria</h6>';
 					$txt .= '<input type="text" name="idtrademark" readonly value="'.$idtrademark.'" class="form-control" />';
 				}
-				$txt .= '<label>Nombre</label>';
+				$txt .= '<h6 class="warning">Nombre</h6>';
 				$txt .= '<input type="text" name="tname" maxlength="70" class="form-control"';
 					if($idtrademark and $dttrademark) $txt .= ' value="'.$dttrademark[0]['tname'].'"';
 				$txt .= ' required />';
-				$txt .= '<label>Icono</label>';
+				$txt .= '<h6 class="warning">Icono</h6>';
 				$txt .= '<input type="text" name="timg" maxlength="50" class="form-control"';
 					if($idtrademark and $dttrademark) $txt .= ' value="'.$dttrademark[0]['timg'].'"';
 				$txt .= ' />';

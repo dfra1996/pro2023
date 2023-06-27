@@ -36,7 +36,7 @@ class mtrademark{
 	public function instrademark($idtrademark, $tname, $timg){
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
-		$sql = "CALL instrademark(:idtrademark, :tname, :timg);";
+		$sql = "CALL instrade(:idtrademark, :tname, :timg);";
 		//echo "<br><br><br><br>".$sql."<br>'".$idtrademark."'-'".$tname."'-'".$timg."'<br>";
 		$result = $conexion->prepare($sql);
 		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -52,7 +52,7 @@ class mtrademark{
 	public function deltrademark($idtrademark){
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
-		$sql = "CALL deltrademark(:idtrademark);";
+		$sql = "CALL deltrade(:idtrademark);";
 		//echo "<br><br><br><br>".$sql."<br>".$idtrademark."<br>";
 		$result = $conexion->prepare($sql);
 		//echo $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
