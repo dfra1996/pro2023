@@ -95,7 +95,7 @@ DELIMITER //
 			INSERT INTO trademark (tname, timg) VALUES (tnam, tim);
 		ELSE
 			UPDATE trademark 
-			SET tname=timg, timg=tim
+			SET tname=tnam, timg=tim
 			WHERE idtrademark=idtrademar;
 		END IF;
 	END //
