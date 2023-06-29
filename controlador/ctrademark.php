@@ -37,8 +37,8 @@ if($opera=="InsAct"){
 			}
 		}
 		$mtrademark->instrademark($idtrademark, $tname, $timg);
-		echo "<script>alert('Datos insertados y/o actualizados existosamente');</script>";
-		echo '<script>window.location="home.php?pg='.$pg.'";</script>';
+		#echo "<script>alert('Datos insertados y/o actualizados existosamente');</script>";
+		#echo '<script>window.location="home.php?pg='.$pg.'";</script>';
 	}else{
 		echo "<script>alert('Falta llenar algunos campos');</script>";
 	}
@@ -90,8 +90,14 @@ function insdatos($idtrademark,$pg,$arc){
 				$txt .= '<h6 class="warning">Icono</h6>';
 
 				if($idtrademark and $dttrademark){
-					$txt .= 'Aqui va el div de la imagen: '.'<img src="'.$dttrademark[0]['timg'].'">';
-				
+					$txt .= '<div class="container">';
+						$txt .= '<div class="row justify-content-center">';
+							$txt .= '<div class="col-6 d-flex align-items-center">';
+								$txt .= '<img  class="img-fluid" src="'.$dttrademark[0]['timg'].'">';	
+							$txt .= '</div>';
+						$txt .= '</div>';
+					$txt .= '</div>';
+			
 				}
 				if($idtrademark and $dttrademark) {$txt .= '<input type="hidden" name="timg" value="'.$dttrademark[0]['timg'].'">';}
 
@@ -146,7 +152,7 @@ function mosdatos($pg,$arc){
 								$txt .= '</td>';
 								$txt .= '<td>'.$dt['idtrademark'].'</td>';
 								$txt .= '<td>'.$dt['tname'].'</td>';
-								$txt .= '<td>'.$dt['timg'].'</td>';
+								$txt .= '<td><img src="'.$dt['timg'].'" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px;" alt="'.$dt['tname'].'"></td>';
 							}
 							$txt .= '</tr>';					
 						$txt .= '</tbody>';
